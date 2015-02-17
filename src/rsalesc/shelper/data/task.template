@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef unsigned long long ull;
+typedef long long ll;
+typedef unsigned int uint;
+typedef pair<int, int> ii;
+typedef vector<int> vi;
+typedef vector<ii> vii;
+typedef vector<vi> vvi;
+typedef map<int, int> mii;
+
+// Input macros
+#define RI ({int a; in >> a; a;})
+#define RC ({char c; in >> c; c})
+#define RS ({string a; in >> a; move(a)})
+#define RLL ({long long a; in >> a; a;})
+#define RD ({double a; in >> a; a;})
+// Useful constants
+const int INF =                     numeric_limits<int>::max();
+const int MINF =                    numeric_limits<int>::min();
+const int INFF =                    (INF/2-1);
+const int EPS =                     1e-9;
+const int dy8 [] =                  {-1, -1, 0, 1, 1, 1, 0, -1};
+const int dx8 [] =                  {0, 1, 1, 1, 0, -1, -1, -1};
+const int dy4 [] =                  {-1, 0, 1, 0};
+const int dx4 [] =                  {0, 1, 0, -1};
+const int pi =                      3.1415926535897932384626;
+// Useful hardware instructions
+#define bitcount                    __builtin_popcount
+#define gcd                         __gcd
+#define bitfirst                    __builtin_ctz // count trailing zeros
+#define bitlast                     __builtin_clz // count leading zeros
+// Useful comparation
+#define bet(x,a,b) (a<x&&x<b)
+#define beti(x,a,b) (a<=x&&x<=b)
+#define remax(a,b) (a)=max((a),(b)) // set a to the maximum of a and b
+#define remin(a,b) (a)=min((a),(b));
+// Useful container manipulation / traversal macros
+#define rep(i,a,b)                  for(int i=a;i<b;i++)
+#define repi(i,a,b)                 for(int i=a;i<=b;i++)
+#define rrep(i,a,b)                 for(int i=a;i>b;i--)
+#define rrepi(i,a,b)                for(int i=a;i>=b;i--)
+#define foreach(v, c)               for( typeof( (c).begin()) v = (c).begin();  v != (c).end(); ++v)
+#define all(a)                      a.begin(), a.end()
+#define pb                          push_back
+#define eb                          emplace_back
+#define ms(a,v)                     memset(a, v, sizeof a)
+#define sz(a)                       ((int)(a.size()))
+#define mp                          make_pair
+#define mt                          make_tuple
+#define contains(c,x)                ((c).find(x) != (c).end())
+// Bit ops
+#define bit(x,i) ((x>>i)&1ull)  //select the bit of position i of x
+#define bitset(x, i) (x|(1ull<<i))
+#define bittog(x, i) (x^(1ull<<i))
+#define bitclear(x,i) (x&(0ull<<i))
+#define lowbit(x) ((x)&((x)^((x)-1))) //get the lowest bit of x
+
+
+class %%taskname%%{
+public:
+    // Problem heap variables
+
+    //
+    void solve(std::istream & in, std::ostream & out){
+
+    }
+};

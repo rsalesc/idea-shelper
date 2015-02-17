@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8.4)
+project(%%PROJECT_NAME%%)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} %%CXX_FLAGS%%")
+
+add_executable(TestRunner runner.cpp)
+add_executable(Highlighting %%TASKS_FILES%%)
+add_executable(OJHighlighting %%OJ_TASKS_FILES%%)

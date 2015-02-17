@@ -1,0 +1,58 @@
+<idea-plugin version="2">
+  <id>com.rsalesc.shelper</id>
+  <name>SHelper</name>
+  <version>1.0</version>
+  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+  <description><![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
+
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <depends>com.intellij.modules.clion</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <configurationType implementation="rsalesc.shelper.tasks.TaskConfigurationType"/>
+    <!--<programRunner implementation="rsalesc.shelper.tasks.TaskRunner"/>-->
+  </extensions>
+
+  <application-components>
+    <component>
+      <implementation-class>rsalesc.shelper.components.Configurator</implementation-class>
+    </component>
+  </application-components>
+
+  <project-components>
+      <component>
+          <implementation-class>rsalesc.shelper.components.ProjectConfigurator</implementation-class>
+      </component>
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="rsalesc.shelper.ParseCodeforces" class="rsalesc.shelper.actions.ParseCodeforces" text="Parse Codeforces"
+            description="Parse a codeforces contest"
+            icon="/rsalesc/shelper/data/icons/codeforces.png">
+    </action>
+    <action id="rsalesc.shelper.ShowConfiguratorAction" class="rsalesc.shelper.actions.ShowConfiguratorAction" text="Configure SHelper"
+            description="Configure"
+            icon="/rsalesc/shelper/data/icons/settings.png">
+    </action>
+      <action id="rsalesc.shelper.EditTestsAction" class="rsalesc.shelper.actions.EditTestsAction" text="Edit Tests"
+              description="Edit tests"
+              icon="/rsalesc/shelper/data/icons/edit.png">
+      </action>
+  </actions>
+
+</idea-plugin>

@@ -1,0 +1,16 @@
+#include <iostream>
+
+%%taskcode%%
+
+namespace SHelper{
+    %%taskname%% solver; // make sure it's initialized on heap
+}
+
+int main(){
+    std::cin.sync_with_stdio(false);
+    std::cin.tie(0);
+    std::istream & in(std::cin);
+    std::ostream & out(std::cout);
+    SHelper::solver.solve(in,out);
+    return 0;
+}

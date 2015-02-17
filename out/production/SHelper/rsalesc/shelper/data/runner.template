@@ -1,0 +1,114 @@
+#include <iostream> // ajeitar isso dps
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <locale>
+#include <ctime>
+#include <iomanip>
+
+#include "%%taskpath%%"
+
+#define _countof(_Array) (sizeof(_Array) / sizeof(_Array[0]))
+
+namespace SHelper{
+    struct Test{
+        int idx;
+        std::string input, output;
+        Test(int id, std::string in, std::string out) : idx(id), input(in), output(out){}
+    };
+
+    #if %%color%%
+    const char * CYAN = "\e[36m";
+    const char * GREEN = "\e[32m";
+    const char * DEFAULT = "\e[0m";
+    const char * RED = "\e[31m";
+    #else
+    const char * CYAN = "";
+    const char * GREEN = "";
+    const char * DEFAULT = "";
+    const char * RED = "";
+    #endif
+
+    std::vector<std::string> tokenize(std::string x){
+        x.push_back(' ');
+        bool tokenizing = false;
+        std::vector<std::string> ans;
+        std::string acc;
+        for(int i =0; i < x.size(); i++){
+            if(isspace(x[i])){
+                if(tokenizing){
+                    ans.push_back(acc);
+                    acc.clear();
+                    tokenizing = false;
+                }
+                continue;
+            }
+            tokenizing = true;
+            acc.push_back(x[i]);
+        }
+        return ans;
+    }
+
+    bool is_double(std::string token){return false;}
+
+    bool check(std::string expected, std::string actual) {
+        std::vector<std::string> e_token = tokenize(expected);
+        std::vector<std::string> a_token = tokenize(actual);
+        const char * info_text = "Verdict info: ";
+        if(e_token.size() != a_token.size()){
+            std::cout << info_text << "expected " << (int)e_token.size() << " tokens and found " << (int)a_token.size() << " instead" << std::endl;
+            return false;
+        }
+        for(int i = 0; i < a_token.size(); i++){
+            if(!is_double(e_token[i])){
+                if(e_token[i] != a_token[i]){
+                    std::cout << info_text << "difference at token #" << i << ", expected \'" << e_token[i] << "\' and found \'" << a_token[i] << "\'" << std::endl;
+                    return false;
+                }
+            }else{
+                double e_double = std::atof(e_token[i].c_str());
+                double a_double = std::atof(a_token[i].c_str());
+                if(fabs(e_double - a_double) > 1e-6){
+                    std::cout << info_text << "difference at token #" << i << ", expected \'" << e_token[i] << "\' and found \'" << a_token[i] << "\'" << std::endl;
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // instance of tests. make sure it's initialized on heap
+    Test tests[] = {
+            %%tests%%
+    };
+}
+
+
+int main(){
+    std::cout << fixed << setprecision(3);
+
+    int test_count = _countof(SHelper::tests);
+
+    for(int i = 0; i < test_count; i++){
+        const SHelper::Test test = SHelper::tests[i];
+        std::stringstream in(test.input);
+        std::stringstream out;
+        std::cout << SHelper::CYAN << "Test #" << (test.idx) << SHelper::DEFAULT << std::endl;
+        std::cout << std::endl;
+        %%taskname%% * solver = new %%taskname%%;
+        std::cout << SHelper::CYAN << "Input: \n" << SHelper::DEFAULT << test.input << std::endl;
+        std::cout << SHelper::CYAN << "Expected output: \n" << SHelper::DEFAULT << test.output << std::endl;
+        std::cout << SHelper::CYAN << "Your answer: " << SHelper::DEFAULT << std::endl;
+        clock_t start_t = clock();
+        solver->solve(in, out);
+        clock_t end_t = clock();
+        std::cout << out.str();
+        std::cout << endl;
+        std::cout << SHelper::CYAN << "Verdict: " << (SHelper::check(test.output, out.str()) ? SHelper::GREEN + string("ACCEPTED") : SHelper::RED + string("WRONG ANSWER")) << SHelper::DEFAULT << endl;
+        std::cout << SHelper::CYAN << "Execution time: " << SHelper::DEFAULT << (double)(end_t-start_t)/CLOCKS_PER_SEC << endl;
+        delete solver;
+    }
+    return 0;
+}
+
